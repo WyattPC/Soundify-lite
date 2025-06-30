@@ -1,0 +1,91 @@
+.dashboard {
+    display: flex;
+    height: 100vh;
+    background-color: #121212;
+    color: white;
+    font-family: sans-serif;
+  }
+  
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .section {
+    margin-bottom: 30px;
+  }
+  
+  .section h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .playlist-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .playlist-card {
+    background-color: #1e1e1e;
+    width: 180px;
+    height: 180px;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    align-items: flex-end;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .playlist-card:hover {
+    background-color: #2a2a2a;
+  }
+  
+  .tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .tabs button {
+    padding: 6px 14px;
+    background: #282828;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .tabs button:hover {
+    background: #3a3a3a;
+  }
+  
+  .playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+  }
+  
+  .playlist-tile {
+    background: #1f1f1f;
+    padding: 15px;
+    height: 100px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: flex-end;
+    transition: background 0.2s ease;
+  }
+  
+  .playlist-tile:hover {
+    background: #2e2e2e;
+  }
+  
