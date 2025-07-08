@@ -1,23 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "./Header.css"; // if using styles here
+import "./Header.css";
+import { useNavigate } from "react-router-dom";
 
-function Header({ user }) {
+
+export default function Header({ user }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    // If not logged in, redirect to login
+    if (!user || !user.username) {
+      navigate("/");
+    }
+  };
+
   return (
     <header className="header">
-      <h1 className="app-title">Soundify Lite</h1>
-
-      <div className="top-right">
-        {user && user.username ? (
-          <button className="user-button">{user.username}</button>
-        ) : (
-          <Link to="/">
-            <button className="login-button">Login</button>
-          </Link>
-        )}
-      </div>
+      <div className="logo">Soundify Lite</div>
+      <button className="login-button" onClick={handleClick}>
+        {user && user.username ? user.username : "Login"}
+      </button>
     </header>
   );
 }
-
-export default Header;

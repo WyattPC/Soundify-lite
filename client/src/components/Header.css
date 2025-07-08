@@ -2,39 +2,28 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    background-color: #000;
+    padding: 1rem 2rem;
+    color: white;
+    height: 60px;
   }
   
-  .top-right {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
   }
   
-  .login-button,
-  .user-button {
+  .login-button {
     background-color: #1db954;
     color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 24px;
+    padding: 8px 16px;
+    border-radius: 9999px;
     font-weight: bold;
+    border: none;
     cursor: pointer;
   }
   
-  .login-button:hover,
-  .user-button:hover {
+  .login-button:hover {
     background-color: #1ed760;
   }
-
-  .sidebar {
-    width: 250px;
-    background-color: #000;
-    height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow-y: auto;
-    position: relative;
-  }
-  
   

@@ -10,15 +10,15 @@ function AppWrapper() {
 
   // Simulated auth state
   const [user, setUser] = useState({
-    username: "Wyatt"
+    username: "Wyatt" // 🔁 Change to null to test login version
   });
 
-  // Only show header on protected pages
-  const showHeader = [ "/dashboard"].includes(location.pathname);
+  // Show header on protected pages only
+  const showHeader = ["/home", "/dashboard"].includes(location.pathname);
 
   return (
     <>
-      {showHeader && <Header user={user} />}
+      {showHeader && <Header user={user} />} {/* 👈 Smart conditional header */}
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
