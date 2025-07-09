@@ -1,16 +1,15 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
-import Header from '../components/Header';
 import './Dashboard.css';
 
-export default function Dashboard() {
+// Accept user as a prop (for possible future use)
+export default function Dashboard({ user }) {
   return (
     <div className="dashboard">
       <Sidebar />
-
       <div className="main-content">
-        <Header />
-        
+        {/* <Header user={user} />  <-- REMOVED! */}
+
         <div className="section">
           <h2>THE BEST PLAYLISTS</h2>
           <div className="playlist-row">
