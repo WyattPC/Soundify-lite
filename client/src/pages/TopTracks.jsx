@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // ⚠️ Use your own valid token from Spotify's console here for testing:
-const TOKEN = "BQASI__o4XbjYYmJxYPOxf_D4KGSdWbX2RWP55cAoZK9B9vulVI0I2miMxpZvCFSeOInNuLINrnWEz0tmkBdJatcXBoGtZDgaK4uDFEZrPw2MeeGNWiHqemzojrrO6Svs8j6f9-V9JDvbz8b03Imfw2FCKoZ-OMR8KvCJQ_LK4oSpG4CgE60RoqoW3-EXIjt1rT-NIWEqeCOKolv_XX-6kP2bNN_RLSArE5x6PEolibA37mZ3cPNRiMjsdL7ludJYMJzoJhjBrdibM0KtBQTJnlVl0KG2X5nGj_Evc59W04Fnu5M-gtDsAwUY2XyQ7rj";
+const TOKEN = "BQCN_BptseoaxvLJ42aB7wTV7ZE0CV5yjIQpE9yeKC00zyee2Q0_-Qh6mBXJ3tcH0AePW9kfww1g5NG8JqZ7ihsptsuxMLSoWs9xgjjh2ee8xm4eLmxRKUlEUl1fuWSdLfuY5vLTiyH-j5laNTnQHbvnnoCzr3oFUWL8uVuigcScZd7_0xa0Xp_3e2MkGTSQHB3vwmpPoocGifFEMZBBzymgZ14eTFdsT2xv9eOYtlqX4gf9qEPaXvA47rmd43Vg87tBBv4TbQindjYkLgfI55tyFFWxEuwq_BGzGJj4xLygRHiBuQ90b3gp2nEvaqe8";
 
 async function fetchWebApi(endpoint, method = "GET", body) {
   const res = await fetch(`https://api.spotify.com/${endpoint}`, {
