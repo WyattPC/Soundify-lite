@@ -39,7 +39,7 @@ function generateRandomString(length) {
 app.get('/login', function(req, res) {
 
   var state = generateRandomString(16);
-  var scope = 'user-read-private user-read-email';
+  var scope = 'user-read-recently-played';
 
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
@@ -81,14 +81,16 @@ app.get('/callback', async (req, res) => {
       // Success! You now have an access token
       const { access_token, refresh_token, expires_in } = response.data;
       
+      // Log the access token to console for testing purposes
+      console.log('=== ACCESS TOKEN FOR TESTING ===');
+      console.log('Access Token:', access_token);
+      console.log('Refresh Token:', refresh_token);
+      console.log('Expires In:', expires_in);
+      console.log('================================');
+      
       // For now, just send the tokens as JSON
       // In a real app, you'd store these securely
-      res.json({
-        access_token,
-        refresh_token,
-        expires_in,
-        message: 'Successfully authenticated with Spotify!'
-      });
+      res.redirect(`http://localhost:5173/statistics?access_token=${access_token}`);
       
     } catch (error) {
       console.error('Token exchange error:', error.response?.data || error.message);
@@ -97,6 +99,30 @@ app.get('/callback', async (req, res) => {
         details: error.response?.data || error.message
       });
     }
+  }
+});
+
+// Endpoint to get the user's last 50 played tracks
+app.get('/recently-played', async (req, res) => {
+  const authHeader = req.headers['authorization'];
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Missing or invalid Authorization header' });
+  }
+  const access_token = authHeader.split(' ')[1];
+
+  try {
+    const response = await axios.get('https://api.spotify.com/v1/me/player/recently-played?limit=50', {
+      headers: {
+        'Authorization': `Bearer ${access_token}`
+      }
+    });
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error fetching recently played tracks:', error.response?.data || error.message);
+    res.status(400).json({
+      error: 'Failed to fetch recently played tracks',
+      details: error.response?.data || error.message
+    });
   }
 });
 

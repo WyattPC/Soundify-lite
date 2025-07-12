@@ -23,6 +23,57 @@
     font-weight: bold;
     margin-bottom: 15px;
   }
+
+  /* Recently Played Tracks Styles */
+  .tracks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 600px;
+    overflow-y: auto;
+  }
+
+  .track-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+  }
+
+  .track-item:hover {
+    background-color: #2a2a2a;
+  }
+
+  .track-image img {
+    border-radius: 4px;
+    object-fit: cover;
+  }
+
+  .track-info {
+    flex: 1;
+  }
+
+  .track-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: #ffffff;
+  }
+
+  .track-info p {
+    font-size: 14px;
+    margin: 0 0 2px 0;
+    color: #b3b3b3;
+  }
+
+  .track-album {
+    font-size: 12px !important;
+    color: #808080 !important;
+  }
   
   .playlist-row {
     display: flex;

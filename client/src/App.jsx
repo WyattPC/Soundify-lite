@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
+import Statistics from "./pages/Statistics";
 import HomePage from "./pages/HomePage";
 import SpotifyExplorer from "./pages/SpotifyExplorer";
 import TopTracksAndSave from "./pages/TopTracksAndSave";
@@ -18,7 +19,7 @@ function AppWrapper() {
   });
 
   // Show header on protected pages only
-  const showHeader = ["/home", "/dashboard"].includes(location.pathname);
+  const showHeader = ["/home", "/dashboard", "/statistics"].includes(location.pathname);
 
   return (
     <>
@@ -27,6 +28,7 @@ function AppWrapper() {
         <Route path="/" element={<LoginPage />} />
         {/* Pass user prop to Dashboard */}
         <Route path="/dashboard" element={<Dashboard user={user} />} />
+        <Route path="/statistics" element={<Statistics />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/top-tracks" element={<TopTracks />} />
         <Route path="/SpotifyExplorer" element={<SpotifyExplorer/>}/>

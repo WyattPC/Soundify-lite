@@ -1,0 +1,110 @@
+.statistics {
+  display: flex;
+  height: 100vh;
+  background-color: #121212;
+  color: white;
+  font-family: sans-serif;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.stats-section {
+  margin-bottom: 40px;
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+}
+
+.stats-section h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+/* Recently Played Tracks Styles */
+.tracks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.track-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  background-color: #282828;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.track-item:hover {
+  background-color: #3a3a3a;
+}
+
+.track-image img {
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.track-info {
+  flex: 1;
+}
+
+.track-info h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: #ffffff;
+}
+
+.track-info p {
+  font-size: 14px;
+  margin: 0 0 2px 0;
+  color: #b3b3b3;
+}
+
+.track-album {
+  font-size: 12px !important;
+  color: #808080 !important;
+}
+
+/* Scrollbar styling */
+.tracks-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tracks-container::-webkit-scrollbar-track {
+  background: #1e1e1e;
+  border-radius: 4px;
+}
+
+.tracks-container::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 4px;
+}
+
+.tracks-container::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
+} 
