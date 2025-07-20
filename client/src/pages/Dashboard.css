@@ -139,4 +139,10 @@
   .playlist-tile:hover {
     background: #2e2e2e;
   }
+
+/* Sidebar icon hover effect */
+.sidebar-icon:hover svg {
+  color: #1db954;
+  transition: color 0.2s;
+}
   

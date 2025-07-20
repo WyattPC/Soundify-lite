@@ -6,38 +6,36 @@ import './Statistics.css';
 export default function Statistics() {
   const [searchParams] = useSearchParams();
   const [recentTracks, setRecentTracks] = useState([]);
+  const [topArtists, setTopArtists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [loadingArtists, setLoadingArtists] = useState(true);
+  const [errorArtists, setErrorArtists] = useState(null);
 
   useEffect(() => {
+    // Helper to get access token from URL or localStorage
+    let accessToken = searchParams.get('access_token');
+    if (!accessToken) {
+      accessToken = localStorage.getItem('spotify_access_token');
+    } else {
+      localStorage.setItem('spotify_access_token', accessToken);
+    }
+
+    // Fetch recently played tracks
     const fetchRecentTracks = async () => {
-      // First, try to get token from URL parameters (new login)
-      let accessToken = searchParams.get('access_token');
-      
-      // If no token in URL, try to get from localStorage
-      if (!accessToken) {
-        accessToken = localStorage.getItem('spotify_access_token');
-      } else {
-        // Store the token in localStorage for future use
-        localStorage.setItem('spotify_access_token', accessToken);
-      }
-      
       if (!accessToken) {
         setError('No access token found. Please login again.');
         setLoading(false);
         return;
       }
-
       try {
         const response = await fetch('https://127.0.0.1:8888/recently-played', {
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }
         });
-
         if (!response.ok) {
           if (response.status === 401) {
-            // Token expired, clear it and show error
             localStorage.removeItem('spotify_access_token');
             setError('Access token expired. Please login again.');
           } else {
@@ -55,7 +53,42 @@ export default function Statistics() {
       }
     };
 
+    // Fetch top artists (last month)
+    const fetchTopArtists = async () => {
+      setLoadingArtists(true);
+      setErrorArtists(null);
+      if (!accessToken) {
+        setErrorArtists('No access token found. Please login again.');
+        setLoadingArtists(false);
+        return;
+      }
+      try {
+        const response = await fetch('https://127.0.0.1:8888/top-artists', {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+        });
+        if (!response.ok) {
+          if (response.status === 401) {
+            localStorage.removeItem('spotify_access_token');
+            setErrorArtists('Access token expired. Please login again.');
+          } else {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+        } else {
+          const data = await response.json();
+          setTopArtists(data.items || []);
+        }
+      } catch (err) {
+        console.error('Error fetching top artists:', err);
+        setErrorArtists('Failed to load top artists. Please try again.');
+      } finally {
+        setLoadingArtists(false);
+      }
+    };
+
     fetchRecentTracks();
+    fetchTopArtists();
   }, [searchParams]);
 
   if (loading) {
@@ -127,12 +160,38 @@ export default function Statistics() {
             </div>
           </div>
 
-          {/* Future API calls can be added here */}
+          {/* Top Artists Section */}
           <div className="stats-section">
-            <h3>Top Artists</h3>
-            <p>Coming soon...</p>
+            <h3>Top 20 Artists (Last Month)</h3>
+            {loadingArtists ? (
+              <p>Loading top artists...</p>
+            ) : errorArtists ? (
+              <p className="text-red-400">{errorArtists}</p>
+            ) : topArtists.length === 0 ? (
+              <p>No top artists found.</p>
+            ) : (
+              <div className="artists-grid">
+                {topArtists.map((artist, idx) => (
+                  <div key={artist.id} className="artist-card">
+                    <div className="artist-rank">#{idx + 1}</div>
+                    <div className="artist-image">
+                      {artist.images[0] && (
+                        <img 
+                          src={artist.images[0].url} 
+                          alt={artist.name}
+                          width="80"
+                          height="80"
+                        />
+                      )}
+                    </div>
+                    <div className="artist-name">{artist.name}</div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
+          {/* Future API calls can be added here */}
           <div className="stats-section">
             <h3>Top Tracks</h3>
             <p>Coming soon...</p>

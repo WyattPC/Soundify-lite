@@ -56,8 +56,8 @@ import {
         className={`flex items-center justify-center cursor-pointer transition-all p-4 rounded-lg ${
           isActive 
             ? 'text-white bg-gray-800' 
-            : 'hover:text-white hover:bg-gray-800'
-        }`}
+            : 'hover:bg-gray-800'
+        } sidebar-icon`}
         onClick={onClick}
       >
         <div>{icon}</div>

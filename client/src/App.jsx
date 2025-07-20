@@ -3,7 +3,6 @@ import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import Statistics from "./pages/Statistics";
 import HomePage from "./pages/HomePage";
-import SpotifyExplorer from "./pages/SpotifyExplorer";
 import TopTracksAndSave from "./pages/TopTracksAndSave";
 import Header from "./components/Header";
 import TopTracks from "./pages/TopTracks";
@@ -31,7 +30,6 @@ function AppWrapper() {
         <Route path="/statistics" element={<Statistics />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/top-tracks" element={<TopTracks />} />
-        <Route path="/SpotifyExplorer" element={<SpotifyExplorer/>}/>
         <Route path="/top-tracks-save" element={<TopTracksAndSave />} />
       </Routes>
     </>

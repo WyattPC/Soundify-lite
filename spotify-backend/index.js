@@ -39,7 +39,7 @@ function generateRandomString(length) {
 app.get('/login', function(req, res) {
 
   var state = generateRandomString(16);
-  var scope = 'user-read-recently-played';
+  var scope = 'user-read-recently-played user-top-read';
 
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
@@ -47,7 +47,8 @@ app.get('/login', function(req, res) {
       client_id: client_id,
       scope: scope,
       redirect_uri: redirect_uri,
-      state: state
+      state: state,
+      show_dialog: true
     }));
 });
 
@@ -121,6 +122,30 @@ app.get('/recently-played', async (req, res) => {
     console.error('Error fetching recently played tracks:', error.response?.data || error.message);
     res.status(400).json({
       error: 'Failed to fetch recently played tracks',
+      details: error.response?.data || error.message
+    });
+  }
+});
+
+// Endpoint to get the user's top 20 artists from the last month
+app.get('/top-artists', async (req, res) => {
+  const authHeader = req.headers['authorization'];
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Missing or invalid Authorization header' });
+  }
+  const access_token = authHeader.split(' ')[1];
+
+  try {
+    const response = await axios.get('https://api.spotify.com/v1/me/top/artists?limit=20&time_range=short_term', {
+      headers: {
+        'Authorization': `Bearer ${access_token}`
+      }
+    });
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error fetching top artists:', error.response?.data || error.message);
+    res.status(400).json({
+      error: 'Failed to fetch top artists',
       details: error.response?.data || error.message
     });
   }
